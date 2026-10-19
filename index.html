@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tamagotchê · Bichos do Sul</title>
+<meta name="description" content="Jogo de cuidado com a fauna do Rio Grande do Sul baseado na abordagem de Saúde Única.">
+<meta property="og:title" content="Tamagotchê">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<main class="wrap">
+  <div class="device">
+    <div class="band band-kaingang" aria-hidden="true" title="Inspirado na arte Kaingang"></div>
+    <header class="device-top">
+      <h1>Tamagotchê</h1>
+      <p>Bichos do Sul · Saúde Única</p>
+    </header>
+    <div class="bezel">
+      <div class="screen" id="screen">
+        <div id="view"></div>
+        <div id="modal" class="modal" hidden></div>
+      </div>
+    </div>
+    <div class="band band-charrua" aria-hidden="true" title="Inspirado na arte Charrua"></div>
+    <nav class="buttons" aria-label="Ações">
+      <button id="b-comer" class="btn"><span class="dot"></span>Comer</button>
+      <button id="b-cuidar" class="btn"><span class="dot"></span>Cuidar</button>
+      <button id="b-ambiente" class="btn"><span class="dot"></span>Ambiente</button>
+      <button id="b-saber" class="btn"><span class="dot"></span>Saber</button>
+      <button id="b-foto" class="btn"><span class="dot foto"></span>Foto</button>
+    </nav>
+    <div class="band band-guarani" aria-hidden="true" title="Inspirado na arte Mbyá Guarani"></div>
+  </div>
+  <footer>
+    <button id="b-sobre" class="link">Sobre o jogo</button>
+  </footer>
+</main>
+<script src="js/sprites.js"></script>
+<script src="js/data.js"></script>
+<script src="js/game.js"></script>
+</body>
+</html>
