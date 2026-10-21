@@ -78,7 +78,7 @@ js/game.js      regras, tempo, telas e desenho da cena
 2. Em `js/data.js`, adicione a espécie em `ESPECIES`: gênero das frases (`g`), habitat (`banhado`, `campo`, `mata` ou `estuario`), fases, comidas, cuidado especial (`banho`), companhia e acontecimentos.
 3. Crie acontecimentos e cartas próprios da espécie em `EVENTOS` e `CARTAS`.
 
-## Dados para o TCC
+## Outras especificações
 
 Cada sessão terminada fica salva no navegador (`localStorage`, chave `tamagotche.hist.v1`) com data, pontuação dos três pilares, cartas liberadas, escolhas cuidadosas x descuidadas e pausas feitas x oferecidas. Nada sai do dispositivo. Para ver no navegador: console → `JSON.parse(localStorage.getItem('tamagotche.hist.v1'))`. O registro inclui a velocidade máxima usada (`velMax`)..
 
