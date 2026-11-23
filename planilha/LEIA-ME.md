@@ -30,6 +30,12 @@ Em `js/config.js`, cole o endereço no campo `planilha`:
 planilha: 'https://script.google.com/macros/s/AKfy.../exec'
 ```
 
+## Segurança
+
+- O script só tem permissão para mexer nesta planilha (a linha `@OnlyCurrentDoc` no topo garante isso). Na hora de autorizar, o Google deve pedir acesso apenas a "planilhas em que este app está instalado".
+- Quem tem o endereço `/exec` consegue **adicionar** linhas, mas não consegue **ler** a planilha, nem acessar seu Drive, e-mail ou conta.
+- Se alguém encher a planilha de linhas falsas, crie uma nova implantação (o endereço muda), troque o endereço em `js/config.js` e apague a implantação antiga.
+
 ## Colunas da aba "sessoes"
 
 | Coluna | O que é |

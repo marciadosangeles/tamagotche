@@ -1,4 +1,8 @@
 /**
+ * @OnlyCurrentDoc
+ * A linha acima limita o script a ESTA planilha: ele não consegue abrir
+ * nenhum outro arquivo do seu Google Drive, nem e-mail, nem a conta.
+ *
  * TamagoTchÊ: recebe o resumo de cada partida e grava uma linha na aba "sessoes".
  * Como instalar: veja planilha/LEIA-ME.md.
  */
