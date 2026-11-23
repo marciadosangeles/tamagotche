@@ -9,7 +9,7 @@ Versão 0.2: seis bichos jogáveis, cada um com seu habitat, sua comida, seus ac
 - Cada vida dura cerca de **12 minutos**: filhote, jovem, adulta e idosa.
 - Os botões são **Comer**, **Cuidar**, **Ambiente**, **Saber** e **Foto**.
 - O botão **1x / 2x / 4x**, no topo da tela, acelera o tempo do jogo. As pausas ativas continuam no tempo real.
-- **Foto**: abre a câmera do aparelho para uma selfie com o bicho e gera um cartão (1080×1350, formato de post) com o nome TamagoTchÊ, a fase do bicho, os três medidores e as faixas de grafismos. Dá para compartilhar direto (no celular) ou baixar. Sem câmera, o jogo gera o cartão com a cena do banhado. A imagem é montada no próprio aparelho e não é enviada para nenhum servidor. A câmera só funciona com o jogo aberto por https (o GitHub Pages já é https).
+- **Foto**: abre a câmera do aparelho para uma selfie com o bicho e gera um cartão (1080×1350, formato de post) com o nome TamagoTchÊ, a fase do bicho, os três medidores e as faixas de grafismos. Dá para compartilhar direto (no celular) ou baixar. Sem câmera, o jogo gera o cartão com a cena do banhado. A imagem é montada no próprio aparelho e não é enviada para nenhum servidor.
 - Três medidores mostram a Saúde Única: **Bicho**, **Ambiente** e **Gente**.
 - **Acontecimentos** (enchente, carrapato, cachorro solto, morcego caído...) pedem uma decisão e liberam **cartas de saber**.
 - Três **pausas ativas** por sessão pedem um pequeno movimento ou exercício mental.
@@ -52,15 +52,6 @@ Para testes, abra com `?rapido` no endereço (ex.: `index.html?rapido`): o tempo
 - **Idoso:** tons grisalhos, algas no casco da tartaruga e entalhes e cicatrizes na nadadeira do boto.
 
 Em cada fase aparecem outros bichos do grupo: mãe ou pai com o filhote, filhotes com o adulto, um jovem com o idoso. A exceção é o tigre-d'água filhote, que já nasce sozinho, porque a mãe não cuida dos ovos.
-
-## Publicar no GitHub Pages
-
-1. Crie o repositório `tamagotche` em https://github.com/marciadosangeles.
-2. Envie os arquivos desta pasta (`index.html`, `css/`, `js/`, `README.md`).
-3. Em **Settings → Pages**, escolha *Deploy from a branch*, branch `main`, pasta `/ (root)`.
-4. Em alguns minutos o jogo fica em `https://marciadosangeles.github.io/tamagotche/`.
-
-Não precisa de servidor nem de instalação: é HTML, CSS e JavaScript puro.
 
 ## Estrutura
 
