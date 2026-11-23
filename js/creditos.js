@@ -1,4 +1,4 @@
-/* Créditos do Tamagotchê. Edite aqui: os campos vazios ('') não aparecem. */
+/* Créditos do TamagoTchÊ. Edite aqui: os campos vazios ('') não aparecem. */
 window.TAMAGOTCHE_CREDITOS = {
   autora: 'Márcia dos Angeles',
   papel: 'Criação, pesquisa e conteúdo',

@@ -1,4 +1,4 @@
-# Tamagotchê · Bichos do Sul · Saúde Única
+# TamagoTchÊ · Bichos do Sul · Saúde Única
 
 Jogo no estilo tamagotchi com a fauna do Rio Grande do Sul. Você cuida de um bicho do nascimento à velhice, e a saúde dele depende do ambiente e das pessoas ao redor. É a abordagem de **Saúde Única**: a saúde humana, animal e ambiental é uma só.
 
@@ -9,7 +9,7 @@ Versão 0.2: seis bichos jogáveis, cada um com seu habitat, sua comida, seus ac
 - Cada vida dura cerca de **12 minutos**: filhote, jovem, adulta e idosa.
 - Os botões são **Comer**, **Cuidar**, **Ambiente**, **Saber** e **Foto**.
 - O botão **1x / 2x / 4x**, no topo da tela, acelera o tempo do jogo. As pausas ativas continuam no tempo real.
-- **Foto**: abre a câmera do aparelho para uma selfie com o bicho e gera um cartão (1080×1350, formato de post) com o nome Tamagotchê, a fase do bicho, os três medidores e as faixas de grafismos. Dá para compartilhar direto (no celular) ou baixar. Sem câmera, o jogo gera o cartão com a cena do banhado. A imagem é montada no próprio aparelho e não é enviada para nenhum servidor. A câmera só funciona com o jogo aberto por https (o GitHub Pages já é https).
+- **Foto**: abre a câmera do aparelho para uma selfie com o bicho e gera um cartão (1080×1350, formato de post) com o nome TamagoTchÊ, a fase do bicho, os três medidores e as faixas de grafismos. Dá para compartilhar direto (no celular) ou baixar. Sem câmera, o jogo gera o cartão com a cena do banhado. A imagem é montada no próprio aparelho e não é enviada para nenhum servidor. A câmera só funciona com o jogo aberto por https (o GitHub Pages já é https).
 - Três medidores mostram a Saúde Única: **Bicho**, **Ambiente** e **Gente**.
 - **Acontecimentos** (enchente, carrapato, cachorro solto, morcego caído...) pedem uma decisão e liberam **cartas de saber**.
 - Três **pausas ativas** por sessão pedem um pequeno movimento ou exercício mental.
@@ -125,7 +125,7 @@ Esses grafismos são expressões culturais com significados próprios, e o uso s
 
 ## Nome
 
-"Tamagotchi" é marca registrada da Bandai. Para um projeto educativo sem fins comerciais o risco é baixo, mas vale conferir antes de uma divulgação ampla se o nome "Tamagotchê" pode ficar na versão pública.
+"Tamagotchi" é marca registrada da Bandai. Para um projeto educativo sem fins comerciais o risco é baixo, mas vale conferir antes de uma divulgação ampla se o nome "TamagoTchÊ" pode ficar na versão pública.
 
 ## Fontes do conteúdo
 

@@ -475,7 +475,7 @@
       itens: S.cartas.map(id => ({ label: CARTAS[id].titulo, sub: CARTAS[id].pilar + (S.lidas.includes(id) ? '' : ' · nova!'), fn: () => abrirCarta(id) })) });
   };
 
-  const TEXTO_SOBRE = 'O Tamagotchê é um jogo de cuidado com a fauna do Rio Grande do Sul baseado na abordagem de Saúde Única: a saúde das pessoas, dos animais e do ambiente é uma só.\n\nAs sessões são curtas e têm pausas ativas de propósito.\n\nAs faixas da moldura homenageiam três povos originários do RS:\n• Kaingang (topo): marcas compridas e redondas, rá téi e rá ror.\n• Charrua (meio): linhas paralelas da pintura corporal descrita em registros históricos e a boleadeira. A arte Charrua é pouco documentada; esta faixa precisa ser construída com a comunidade Charrua.\n• Mbyá Guarani (base): o zigue-zague do movimento da cobra e o losango da casa, da cestaria de taquara (ypara).\nEsses grafismos pertencem a esses povos. O uso aqui é uma homenagem que deve ser validada com as comunidades.';
+  const TEXTO_SOBRE = 'O TamagoTchÊ é um jogo de cuidado com a fauna do Rio Grande do Sul baseado na abordagem de Saúde Única: a saúde das pessoas, dos animais e do ambiente é uma só.\n\nAs sessões são curtas e têm pausas ativas de propósito.\n\nAs faixas da moldura homenageiam três povos originários do RS:\n• Kaingang (topo): marcas compridas e redondas, rá téi e rá ror.\n• Charrua (meio): linhas paralelas da pintura corporal descrita em registros históricos e a boleadeira. A arte Charrua é pouco documentada; esta faixa precisa ser construída com a comunidade Charrua.\n• Mbyá Guarani (base): o zigue-zague do movimento da cobra e o losango da casa, da cestaria de taquara (ypara).\nEsses grafismos pertencem a esses povos. O uso aqui é uma homenagem que deve ser validada com as comunidades.';
   const TEXTO_DADOS = '\n\nDados de uso: para entender como o jogo é usado e melhorá-lo, ele registra de forma anônima as visitas e um resumo de cada partida (bicho escolhido, pontuação, escolhas, pausas feitas, uso da foto e da velocidade). Não registra nome, e-mail, fotos nem localização exata. A foto nunca sai do aparelho, a menos que você a compartilhe.';
   function abrirSobre() {
     if (!REGISTRO.configurado()) return abrir({ tipo: 'aviso', titulo: 'Sobre o jogo', ok: 'Fechar', texto: TEXTO_SOBRE });
@@ -498,7 +498,7 @@
 
   function abrirFoto() {
     if (!S) return;
-    abrir({ tipo: 'foto', etapa: 'intro', tag: 'Tamagotchê', titulo: 'Foto com o bicho', texto: TEXTO_FOTO });
+    abrir({ tipo: 'foto', etapa: 'intro', tag: 'TamagoTchÊ', titulo: 'Foto com o bicho', texto: TEXTO_FOTO });
   }
   const TEXTO_FOTO = 'Tire uma selfie com seu bicho e compartilhe sua experiência. A foto fica só no seu aparelho, a menos que você escolha compartilhar.\nCrianças: peçam ajuda a um adulto antes de postar.';
   B.foto.onclick = () => {
@@ -516,7 +516,7 @@
       h += `<div class="cam"><video id="video" playsinline autoplay muted></video><canvas id="cam-bicho"></canvas></div>
         <div><button class="acao" id="clicar">Tirar foto</button><button class="acao sec" data-x>Voltar</button></div>`;
     } else if (m.etapa === 'pronta') {
-      h += `<img class="foto-pronta" src="${m.url}" alt="Cartão do Tamagotchê com o bicho">
+      h += `<img class="foto-pronta" src="${m.url}" alt="Cartão do TamagoTchÊ com o bicho">
         <div>${podeCompartilhar(m) ? '<button class="acao" id="compart">Compartilhar</button>' : ''}
         <button class="acao ${podeCompartilhar(m) ? 'sec' : ''}" id="baixar">Baixar</button>
         <button class="acao sec" id="outra">Outra</button>
@@ -547,7 +547,7 @@
     on('outra', () => { m.etapa = 'intro'; m.erro = ''; m.texto = TEXTO_FOTO; renderModal(); });
     on('baixar', () => { baixar(m); REGISTRO.evento('foto/baixada'); });
     on('compart', async () => {
-      try { await navigator.share({ files: [m.arquivo], title: 'Tamagotchê', text: textoPost() }); REGISTRO.evento('foto/compartilhada'); }
+      try { await navigator.share({ files: [m.arquivo], title: 'TamagoTchÊ', text: textoPost() }); REGISTRO.evento('foto/compartilhada'); }
       catch (e) { if (e && e.name !== 'AbortError') baixar(m); }
     });
     if (m.etapa === 'camera') {
@@ -569,7 +569,7 @@
       .map(l => `<a class="op link-cr" href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.rotulo || l.url)}</a>`).join('');
     abrir({ tipo: 'creditos', html: `
       <span class="tag">Créditos</span>
-      <h3>Tamagotchê</h3>
+      <h3>TamagoTchÊ</h3>
       ${AUTORA ? `<p class="autora">${esc(AUTORA)}<br><small>${esc([CR.papel, CR.ano].filter(Boolean).join(' · '))}</small></p>` : ''}
       ${links ? `<div class="links-cr">${links}</div>` : ''}
       ${linha('Homenagem', CR.homenagem)}
@@ -585,7 +585,7 @@
     const nome = esp().nome.toLowerCase();
     const link = /^https?:/.test(location.protocol) ? ' ' + location.origin + location.pathname : '';
     const por = AUTORA ? ` Criado por ${AUTORA}.` : '';
-    return `Cuidei de ${um()} ${nome} no Tamagotchê, um jogo de Saúde Única com bichos do Rio Grande do Sul!${por} #Tamagotchê #SaúdeÚnica${link}`;
+    return `Cuidei de ${um()} ${nome} no TamagoTchÊ, um jogo de Saúde Única com bichos do Rio Grande do Sul!${por} #TamagoTchÊ #SaúdeÚnica${link}`;
   }
   function baixar(m) {
     const a = document.createElement('a');
@@ -609,8 +609,8 @@
     faixa(g, 'kaingang', 0, 0, 1080, 56);
     g.fillStyle = '#2b211c'; g.textAlign = 'center';
     g.font = 'bold 64px "Press Start 2P", monospace';
-    if (g.measureText('Tamagotchê').width > 980) g.font = 'bold 48px "Press Start 2P", monospace';
-    g.fillText('Tamagotchê', 540, 140);
+    if (g.measureText('TamagoTchÊ').width > 980) g.font = 'bold 48px "Press Start 2P", monospace';
+    g.fillText('TamagoTchÊ', 540, 140);
     g.fillStyle = '#8a3220'; g.font = '40px VT323, monospace';
     g.fillText('Bichos do Sul · Saúde Única', 540, 182);
 
@@ -638,7 +638,7 @@
     g.fillStyle = '#2b211c';
     textoCabe(g, frase, 540, 1132, 52, 980);
     textoCabe(g, `Bicho ${Math.round(iBicho())} · Ambiente ${Math.round(iAmb())} · Gente ${Math.round(iGente())}`, 540, 1180, 42, 980);
-    g.fillStyle = '#5d7f3a'; textoCabe(g, '#Tamagotchê  #SaúdeÚnica' + (AUTORA ? `  ·  jogo de ${AUTORA}` : ''), 540, 1226, 42, 980);
+    g.fillStyle = '#5d7f3a'; textoCabe(g, '#TamagoTchÊ  #SaúdeÚnica' + (AUTORA ? `  ·  jogo de ${AUTORA}` : ''), 540, 1226, 42, 980);
     faixa(g, 'charrua', 0, 1250, 1080, 46);
     faixa(g, 'guarani', 0, 1296, 1080, 54);
 

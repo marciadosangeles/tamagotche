@@ -4,7 +4,7 @@ O jogo envia uma linha por partida terminada, ou abandonada no meio, para uma pl
 
 ## 1. Criar a planilha e o script
 
-1. Entre em https://sheets.google.com e crie uma planilha em branco. Dê o nome **Tamagotchê – partidas**.
+1. Entre em https://sheets.google.com e crie uma planilha em branco. Dê o nome **TamagoTchÊ – partidas**.
 2. No menu, clique em **Extensões → Apps Script**.
 3. Apague o código que aparece e cole todo o conteúdo do arquivo `apps-script.gs` desta pasta.
 4. Clique no disquete (**Salvar**).
@@ -14,13 +14,13 @@ O jogo envia uma linha por partida terminada, ou abandonada no meio, para uma pl
 1. Clique em **Implantar → Nova implantação**.
 2. Na engrenagem ao lado de "Selecionar tipo", escolha **App da Web**.
 3. Preencha assim:
-   - Descrição: `Tamagotchê`
+   - Descrição: `TamagoTchÊ`
    - Executar como: **Eu** (seu e-mail)
    - Quem pode acessar: **Qualquer pessoa**
 4. Clique em **Implantar** e autorize o acesso com sua conta Google. Se aparecer "O Google não verificou este app", clique em **Avançado → Acessar (não seguro)**. Esse aviso aparece porque o script é seu e não passou por revisão do Google, o que é normal.
 5. Copie o **URL do app da Web**. Ele termina em `/exec`.
 
-Para testar, abra esse endereço no navegador. Deve aparecer "Tamagotchê: registro de partidas ativo."
+Para testar, abra esse endereço no navegador. Deve aparecer "TamagoTchÊ: registro de partidas ativo."
 
 ## 3. Ligar no jogo
 

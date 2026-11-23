@@ -224,7 +224,7 @@ const ESPECIES = {
 const CARTAS = {
   povos: {
     titulo: 'Povos originários do RS', pilar: 'Gente',
-    texto: 'Kaingang, Mbyá Guarani e Charrua são povos originários do Rio Grande do Sul e vivem aqui até hoje. Os Charrua, por muito tempo dados como extintos, tiveram a etnia reconhecida em 2007 e têm aldeia em Porto Alegre. As faixas da moldura do Tamagotchê homenageiam a arte desses povos.'
+    texto: 'Kaingang, Mbyá Guarani e Charrua são povos originários do Rio Grande do Sul e vivem aqui até hoje. Os Charrua, por muito tempo dados como extintos, tiveram a etnia reconhecida em 2007 e têm aldeia em Porto Alegre. As faixas da moldura do TamagoTchÊ homenageiam a arte desses povos.'
   },
   saude_unica: {
     titulo: 'O que é Saúde Única?', pilar: 'Saúde Única',

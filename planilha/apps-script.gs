@@ -1,5 +1,5 @@
 /**
- * Tamagotchê: recebe o resumo de cada partida e grava uma linha na aba "sessoes".
+ * TamagoTchÊ: recebe o resumo de cada partida e grava uma linha na aba "sessoes".
  * Como instalar: veja planilha/LEIA-ME.md.
  */
 const CAMPOS = [
@@ -34,7 +34,7 @@ function doPost(e) {
 
 // Abrir o endereço no navegador mostra se o registro está no ar.
 function doGet() {
-  return resposta('Tamagotchê: registro de partidas ativo.');
+  return resposta('TamagoTchÊ: registro de partidas ativo.');
 }
 
 // Aceita só números e textos curtos. Impede que um texto vire fórmula na planilha.
