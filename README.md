@@ -70,6 +70,9 @@ css/style.css   visual do aparelho e da tela
 js/sprites.js   pixel art (cada letra é uma cor da paleta)
 js/data.js      espécies, cartas de saber, acontecimentos e pausas ativas
 js/game.js      regras, tempo, telas e desenho da cena
+js/config.js    códigos do GoatCounter e da planilha
+js/registro.js  envio de visitas, eventos e partidas
+planilha/       script da Planilha Google e passo a passo
 ```
 
 ### Adicionar um bicho
@@ -81,6 +84,26 @@ js/game.js      regras, tempo, telas e desenho da cena
 ## Outras especificações
 
 Cada sessão terminada fica salva no navegador (`localStorage`, chave `tamagotche.hist.v1`) com data, pontuação dos três pilares, cartas liberadas, escolhas cuidadosas x descuidadas e pausas feitas x oferecidas. Nada sai do dispositivo. Para ver no navegador: console → `JSON.parse(localStorage.getItem('tamagotche.hist.v1'))`. O registro inclui a velocidade máxima usada (`velMax`)..
+
+## Contador de acessos e registro de partidas
+
+São duas camadas, ligadas em `js/config.js`:
+
+1. **GoatCounter** (código `marciadosangeles`): conta visitas e eventos do jogo, sem cookies. O painel fica em https://marciadosangeles.goatcounter.com. Eventos registrados:
+   - `partida/<bicho>`: início de partida
+   - `fase/<bicho>/<fase>`: mudança de fase
+   - `fim/<bicho>/legado` ou `fim/<bicho>/resgate`
+   - `escolha/<acontecimento>/boa` ou `escolha/<acontecimento>/ruim`
+   - `pausa/feita` e `pausa/pulada`
+   - `velocidade/2x` e `velocidade/4x`
+   - `foto/gerada`, `foto/baixada` e `foto/compartilhada`
+   
+   Para o número de visitas aparecer no rodapé do jogo, ative no GoatCounter: **Settings → "Allow adding visitor counts on your website"**.
+2. **Planilha Google**: uma linha por partida, com pontuação, escolhas e pausas. Veja `planilha/LEIA-ME.md`.
+
+Nada é enviado com o jogo aberto no próprio computador (arquivo local), com `?rapido` ou `?teste` no endereço, ou quando a pessoa escolhe "Não enviar meus dados" em "Sobre o jogo". O jogo não registra nome, e-mail, fotos nem localização exata. A tela inicial avisa que há registro anônimo.
+
+Se os dados forem usados como resultado do TCC, confirme com a orientação se é preciso aprovação do Comitê de Ética (CEP) e um termo de consentimento, principalmente com participantes menores de idade.
 
 ## Arte e cultura indígena
 

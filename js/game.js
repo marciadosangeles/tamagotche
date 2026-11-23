@@ -59,8 +59,10 @@
       gsau: 85, saber: 15,
       dormindo: false, proxEvento: 40, eventosFeitos: [],
       cartas: ['saude_unica', 'povos'], velMax: 1, lidas: [], cd: {}, faseIdx: 0,
-      boas: 0, ruins: 0, pausasFeitas: 0, pausasOferecidas: 0, inicio: Date.now()
+      boas: 0, ruins: 0, pausasFeitas: 0, pausasOferecidas: 0, inicio: Date.now(),
+      id: REGISTRO.novaPartida(), escolhas: [], fotos: 0, ativo: 0
     };
+    REGISTRO.evento(`partida/${especie}`);
     anim.x = 50; anim.dir = 1; vel = 1; acum = 0;
     tela = 'jogo'; modal = null;
     renderTela();
@@ -98,6 +100,7 @@
 
     if (f.idx !== S.faseIdx) {
       S.faseIdx = f.idx;
+      REGISTRO.evento(`fase/${S.especie}/${f.id}`);
       anim.coracaoAte = performance.now() + 2500;
       mensagem(f.msg, 7000);
     }
@@ -122,9 +125,34 @@
     hist.push(reg); guarda.gravar(K_HIST, hist.slice(-50));
     guarda.apagar(K_SAVE);
     guarda.gravar('tamagotche.ultimoFim', Date.now());
+    REGISTRO.evento(`fim/${S.especie}/${motivo}`);
+    REGISTRO.sessao(dadosSessao(motivo));
     tela = 'fim'; modal = null;
     renderTela();
   }
+
+  // Linha da planilha: dados da partida, sem nada que identifique a pessoa.
+  function dadosSessao(motivo) {
+    const f = fase();
+    return {
+      id_partida: S.id || '', especie: S.especie, motivo, fase_final: f.id,
+      tempo_jogo_s: S.t, tempo_real_s: Math.round(S.ativo || 0),
+      bicho: Math.round(iBicho()), ambiente: Math.round(iAmb()), gente: Math.round(iGente()),
+      cartas: S.cartas.length, cartas_total: totalCartas(), cartas_lidas: (S.lidas || []).length,
+      escolhas_boas: S.boas, escolhas_ruins: S.ruins, escolhas: (S.escolhas || []).join(' '),
+      pausas_feitas: S.pausasFeitas, pausas_oferecidas: S.pausasOferecidas,
+      vel_max: S.velMax || 1, fotos: S.fotos || 0
+    };
+  }
+
+  // Fechou a aba no meio da partida: registra como abandono (uma vez).
+  let abandonoEnviado = false;
+  window.addEventListener('pagehide', () => {
+    if (abandonoEnviado || tela !== 'jogo' || !S || S.fim || S.t < 5) return;
+    abandonoEnviado = true;
+    guarda.gravar(K_SAVE, S);
+    REGISTRO.sessao(dadosSessao('abandono'));
+  });
 
   /* ---------------- mensagens e HUD ---------------- */
   function mensagem(txt, ms = 5000) {
@@ -177,6 +205,7 @@
     $('#vel').onclick = () => {
       vel = VELOCIDADES[(VELOCIDADES.indexOf(vel) + 1) % VELOCIDADES.length];
       S.velMax = Math.max(S.velMax || 1, vel);
+      REGISTRO.evento(`velocidade/${vel}x`);
       $('#vel').textContent = vel + 'x';
       mensagem(vel === 1 ? 'Tempo normal.' : `Tempo ${vel}x mais rápido. As pausas ativas continuam no tempo real.`);
     };
@@ -198,6 +227,7 @@
         <h2>Escolha seu bicho</h2>
         <div class="grid">${cards}</div>
         <p class="dica">Cada vida dura cerca de 12 minutos. Cuide do bicho, do ambiente e das pessoas: isso é Saúde Única.</p>
+        ${REGISTRO.configurado() && !REGISTRO.recusou ? '<p class="aviso-dados">O jogo registra dados anônimos de uso para pesquisa. Saiba mais em "Sobre o jogo".</p>' : ''}
       </div>`;
     viewEl.querySelectorAll('canvas[data-thumb]').forEach(c => {
       const nm = c.dataset.thumb + '_adulto', t = tamanhoSprite(nm);
@@ -286,10 +316,14 @@
     }
     modalEl.innerHTML = html;
     modalEl.querySelectorAll('.op').forEach(b => b.onclick = () => m.itens[+b.dataset.i].fn());
-    modalEl.querySelectorAll('[data-x]').forEach(b => b.onclick = () => { const cb = m.aoFechar; fechar(); if (cb) cb(); });
+    modalEl.querySelectorAll('[data-x]').forEach(b => b.onclick = () => {
+      if (m.tipo === 'pausa') REGISTRO.evento('pausa/pulada');
+      const cb = m.aoFechar; fechar(); if (cb) cb();
+    });
     const fiz = $('#fiz');
     if (fiz) fiz.onclick = () => {
       S.pausasFeitas++; aplicar({ hum: 10, gsau: 5 }); liberarCarta('pausa');
+      REGISTRO.evento('pausa/feita');
       fechar(); anim.coracaoAte = performance.now() + 2000;
       mensagem('Pausa feita! Corpo e mente agradecem.');
     };
@@ -335,6 +369,8 @@
       itens: ev.opcoes.map(o => ({ label: o.txt, fn: () => {
         aplicar(o.ef);
         if (!o.boa) aplicar({ saber: 3 });
+        (S.escolhas = S.escolhas || []).push(`${id}:${o.boa ? 'boa' : 'ruim'}`);
+        REGISTRO.evento(`escolha/${id}/${o.boa ? 'boa' : 'ruim'}`);
         feedback(o.boa, o.fb, ev.card);
       } }))
     });
@@ -437,8 +473,18 @@
       itens: S.cartas.map(id => ({ label: CARTAS[id].titulo, sub: CARTAS[id].pilar + (S.lidas.includes(id) ? '' : ' · nova!'), fn: () => abrirCarta(id) })) });
   };
 
-  $('#b-sobre').onclick = () => abrir({ tipo: 'aviso', titulo: 'Sobre o jogo', ok: 'Fechar',
-    texto: 'O Tamagotchê é um jogo de cuidado com a fauna do Rio Grande do Sul baseado na abordagem de Saúde Única: a saúde das pessoas, dos animais e do ambiente é uma só.\n\nAs sessões são curtas e têm pausas ativas de propósito.\n\nAs faixas da moldura homenageiam três povos originários do RS:\n• Kaingang (topo): marcas compridas e redondas, rá téi e rá ror.\n• Charrua (meio): linhas paralelas da pintura corporal descrita em registros históricos e a boleadeira. A arte Charrua é pouco documentada; esta faixa precisa ser construída com a comunidade Charrua.\n• Mbyá Guarani (base): o zigue-zague do movimento da cobra e o losango da casa, da cestaria de taquara (ypara).\nEsses grafismos pertencem a esses povos. O uso aqui é uma homenagem que deve ser validada com as comunidades.' });
+  const TEXTO_SOBRE = 'O Tamagotchê é um jogo de cuidado com a fauna do Rio Grande do Sul baseado na abordagem de Saúde Única: a saúde das pessoas, dos animais e do ambiente é uma só.\n\nAs sessões são curtas e têm pausas ativas de propósito.\n\nAs faixas da moldura homenageiam três povos originários do RS:\n• Kaingang (topo): marcas compridas e redondas, rá téi e rá ror.\n• Charrua (meio): linhas paralelas da pintura corporal descrita em registros históricos e a boleadeira. A arte Charrua é pouco documentada; esta faixa precisa ser construída com a comunidade Charrua.\n• Mbyá Guarani (base): o zigue-zague do movimento da cobra e o losango da casa, da cestaria de taquara (ypara).\nEsses grafismos pertencem a esses povos. O uso aqui é uma homenagem que deve ser validada com as comunidades.';
+  const TEXTO_DADOS = '\n\nDados de uso: para a pesquisa do TCC, o jogo registra de forma anônima as visitas e um resumo de cada partida (bicho escolhido, pontuação, escolhas, pausas feitas, uso da foto e da velocidade). Não registra nome, e-mail, fotos nem localização exata. A foto nunca sai do aparelho, a menos que você a compartilhe.';
+  function abrirSobre() {
+    if (!REGISTRO.configurado()) return abrir({ tipo: 'aviso', titulo: 'Sobre o jogo', ok: 'Fechar', texto: TEXTO_SOBRE });
+    const r = REGISTRO.recusou;
+    abrir({ tipo: 'escolha', titulo: 'Sobre o jogo',
+      texto: TEXTO_SOBRE + TEXTO_DADOS + (r ? '\n\nVocê escolheu não enviar dados.' : ''),
+      itens: [{ label: r ? 'Voltar a enviar dados anônimos' : 'Não enviar meus dados',
+        sub: r ? 'Ajuda a pesquisa sobre o jogo' : 'O jogo continua funcionando normalmente',
+        fn: () => { REGISTRO.recusar(!r); abrirSobre(); if (tela === 'inicio') renderTela(); } }] });
+  }
+  $('#b-sobre').onclick = abrirSobre;
 
   /* ---------------- foto com o bicho ----------------
      A câmera só abre quando a pessoa pede. A imagem é montada no próprio
@@ -497,9 +543,9 @@
     on('sem-cam', () => gerarCartao(m, null));
     on('clicar', () => gerarCartao(m, $('#video')));
     on('outra', () => { m.etapa = 'intro'; m.erro = ''; m.texto = TEXTO_FOTO; renderModal(); });
-    on('baixar', () => baixar(m));
+    on('baixar', () => { baixar(m); REGISTRO.evento('foto/baixada'); });
     on('compart', async () => {
-      try { await navigator.share({ files: [m.arquivo], title: 'Tamagotchê', text: textoPost() }); }
+      try { await navigator.share({ files: [m.arquivo], title: 'Tamagotchê', text: textoPost() }); REGISTRO.evento('foto/compartilhada'); }
       catch (e) { if (e && e.name !== 'AbortError') baixar(m); }
     });
     if (m.etapa === 'camera') {
@@ -577,6 +623,7 @@
       if (!blob) { m.erro = 'Não consegui gerar a imagem.'; return renderModal(); }
       if (m.url) URL.revokeObjectURL(m.url);
       m.arquivo = new File([blob], 'tamagotche.jpg', { type: 'image/jpeg' });
+      S.fotos = (S.fotos || 0) + 1; REGISTRO.evento('foto/gerada');
       m.url = URL.createObjectURL(blob);
       m.etapa = 'pronta'; m.erro = ''; m.texto = 'Pronto! Compartilhe ou baixe para postar.';
       renderModal();
@@ -766,10 +813,12 @@
   // O tempo só corre com o jogo visível e sem janela aberta.
   setInterval(() => {
     if (tela !== 'jogo' || !S || modal || S.fim || document.hidden) return;
+    S.ativo = (S.ativo || 0) + 0.25;
     acum += 0.25 * (VEL_TESTE || vel);
     while (acum >= 1 && !modal && !S.fim && tela === 'jogo') { acum -= 1; tick(); }
   }, 250);
 
+  REGISTRO.mostrarContador($('#contador'));
   renderTela();
   requestAnimationFrame(laco);
 })();

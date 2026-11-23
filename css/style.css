@@ -218,3 +218,8 @@ canvas.cena {
 .hud { font-size: 16px; gap: 6px; }
 .hud .fase { overflow: hidden; text-overflow: ellipsis; }
 .btn { font-size: 15px; }
+
+/* registro de dados */
+footer { display: flex; gap: 14px; align-items: center; justify-content: center; flex-wrap: wrap; }
+.contador { font-family: "VT323", monospace; font-size: 18px; color: var(--bg-ink); opacity: .8; }
+.aviso-dados { font-size: 16px; color: var(--lcd-dim); margin: 6px 0 0; }
