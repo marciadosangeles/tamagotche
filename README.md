@@ -83,7 +83,7 @@ planilha/       script da Planilha Google e passo a passo
 
 ## Outras especificações
 
-Cada sessão terminada fica salva no navegador (`localStorage`, chave `tamagotche.hist.v1`) com data, pontuação dos três pilares, cartas liberadas, escolhas cuidadosas x descuidadas e pausas feitas x oferecidas. Nada sai do dispositivo. Para ver no navegador: console → `JSON.parse(localStorage.getItem('tamagotche.hist.v1'))`. O registro inclui a velocidade máxima usada (`velMax`)..
+Cada sessão terminada fica salva no navegador (`localStorage`, chave `tamagotche.hist.v1`) com data, pontuação dos três pilares, cartas liberadas, escolhas cuidadosas x descuidadas e pausas feitas x oferecidas. Essa cópia local fica só no aparelho; o envio anônimo para a pesquisa está descrito em "Contador de acessos e registro de partidas". Para ver no navegador: console → `JSON.parse(localStorage.getItem('tamagotche.hist.v1'))`. O registro inclui a velocidade máxima usada (`velMax`).
 
 ## Contador de acessos e registro de partidas
 
