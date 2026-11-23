@@ -45,7 +45,7 @@ planilha: 'https://script.google.com/macros/s/AKfy.../exec'
 | id_jogador | número sorteado e guardado só no navegador; repete quando a mesma pessoa joga de novo no mesmo aparelho |
 | id_partida | número sorteado para cada partida |
 | especie | capivara, sabia, queroquero, graxaim, tigre ou boto |
-| motivo | `legado` (viveu a vida toda), `resgate` (adoeceu) ou `abandono` (fechou a página no meio) |
+| motivo | `inicio` (partida começou), `legado` (viveu a vida toda), `resgate` (adoeceu), `abandono` (saiu da página no meio) ou `teste` (enviada pelo modo diagnóstico) |
 | fase_final | fase em que a partida terminou |
 | tempo_jogo_s / tempo_real_s | segundos de jogo e segundos reais com o jogo aberto |
 | bicho / ambiente / gente | pontuação final dos três pilares (0 a 100) |
@@ -58,7 +58,11 @@ planilha: 'https://script.google.com/macros/s/AKfy.../exec'
 | dispositivo | `toque` (celular ou tablet) ou `mouse` (computador) |
 | largura_tela, idioma | dados técnicos do navegador |
 
-Uma partida abandonada e retomada depois aparece duas vezes, com o mesmo `id_partida`. Na análise, fique só com a última linha de cada `id_partida`.
+Cada partida gera uma linha `inicio` quando começa e outra quando termina ou quando a pessoa sai da página. Todas têm o mesmo `id_partida`. Na análise, fique só com a última linha de cada `id_partida` e descarte as linhas `teste`.
+
+## Testar se está funcionando
+
+Abra `https://marciadosangeles.github.io/tamagotche/?diagnostico`. Aparece uma janela com o estado do registro e o botão **Enviar linha de teste para a planilha**. Em alguns segundos, uma linha com motivo `teste` deve surgir na aba "sessoes".
 
 ## Se mudar o script depois
 

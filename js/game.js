@@ -63,6 +63,7 @@
       id: REGISTRO.novaPartida(), escolhas: [], fotos: 0, ativo: 0
     };
     REGISTRO.evento(`partida/${especie}`);
+    REGISTRO.sessao(dadosSessao('inicio'));
     anim.x = 50; anim.dir = 1; vel = 1; acum = 0;
     tela = 'jogo'; modal = null;
     renderTela();
@@ -145,14 +146,18 @@
     };
   }
 
-  // Fechou a aba no meio da partida: registra como abandono (uma vez).
-  let abandonoEnviado = false;
-  window.addEventListener('pagehide', () => {
-    if (abandonoEnviado || tela !== 'jogo' || !S || S.fim || S.t < 5) return;
-    abandonoEnviado = true;
+  // Saiu da página no meio da partida (fechou a aba, trocou de app, bloqueou a tela):
+  // registra o estado como 'abandono'. Se a pessoa voltar e terminar, chega outra
+  // linha com o mesmo id_partida; na análise vale a última.
+  let ultimoEnvio = 0;
+  function registrarSaida() {
+    if (tela !== 'jogo' || !S || S.fim || S.t < 5 || Date.now() - ultimoEnvio < 60000) return;
+    ultimoEnvio = Date.now();
     guarda.gravar(K_SAVE, S);
     REGISTRO.sessao(dadosSessao('abandono'));
-  });
+  }
+  document.addEventListener('visibilitychange', () => { if (document.hidden) registrarSaida(); });
+  window.addEventListener('pagehide', registrarSaida);
 
   /* ---------------- mensagens e HUD ---------------- */
   function mensagem(txt, ms = 5000) {
@@ -843,6 +848,30 @@
   }, 250);
 
   REGISTRO.mostrarContador($('#contador'));
+
+  // ?diagnostico no endereço: mostra o estado do registro e envia uma linha de teste.
+  if (new URLSearchParams(location.search).has('diagnostico')) {
+    const e = REGISTRO.estado();
+    const sim = v => v ? 'sim' : 'não';
+    const linhas = [
+      `GoatCounter: ${e.goatcounter}`,
+      `Script do GoatCounter carregado: ${sim(e.gcCarregado)}`,
+      `Planilha: ${e.planilha}`,
+      `Envio ativo: ${sim(e.ativo)}`,
+      `Recusou dados neste aparelho: ${sim(e.recusou)}`,
+      `Aberto localmente: ${sim(e.local)}`,
+      `Modo teste (?rapido/?teste): ${sim(e.teste)}`
+    ].join('\n');
+    setTimeout(() => abrir({ tipo: 'escolha', titulo: 'Diagnóstico', texto: linhas, itens: [
+      { label: 'Enviar linha de teste para a planilha', sub: 'Aparece com motivo "teste"; apague depois', fn: () => {
+        const ok = REGISTRO.sessao({ id_partida: 'teste-' + Date.now(), especie: 'teste', motivo: 'teste' }, true);
+        abrir({ tipo: 'aviso', titulo: 'Diagnóstico', texto: ok
+          ? 'Linha de teste enviada. Abra a planilha e veja a aba "sessoes" (pode levar alguns segundos).'
+          : 'A planilha não está configurada em js/config.js.' });
+      } },
+      { label: 'Voltar a enviar dados neste aparelho', sub: 'Desfaz "Não enviar meus dados"', off: !e.recusou, fn: () => { REGISTRO.recusar(false); fechar(); } }
+    ] }), 800);
+  }
   renderTela();
   requestAnimationFrame(laco);
 })();

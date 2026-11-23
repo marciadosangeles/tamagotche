@@ -52,8 +52,8 @@ window.REGISTRO = (function () {
   }
 
   /* ---------- Planilha: uma linha por partida ---------- */
-  function sessao(dados) {
-    if (!C.planilha || !ativo()) return;
+  function sessao(dados, forcar) {
+    if (!C.planilha || (!ativo() && !forcar)) return false;
     const corpo = JSON.stringify(Object.assign({
       app: 'tamagotche', versao: VERSAO, id_jogador: idJogador,
       dispositivo: matchMedia('(pointer: coarse)').matches ? 'toque' : 'mouse',
@@ -67,6 +67,17 @@ window.REGISTRO = (function () {
       fetch(C.planilha, { method: 'POST', mode: 'no-cors', keepalive: true,
         headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: corpo }).catch(() => {});
     }
+    return true;
+  }
+
+  // Estado do registro, para o modo ?diagnostico
+  function estado() {
+    return {
+      goatcounter: C.goatcounter || '(vazio)',
+      planilha: C.planilha ? 'configurada' : '(vazia)',
+      recusou, local, teste, ativo: ativo(),
+      gcCarregado: !!(window.goatcounter && window.goatcounter.count)
+    };
   }
 
   /* ---------- contador público no rodapé ---------- */
@@ -91,7 +102,7 @@ window.REGISTRO = (function () {
   carregarGoatCounter();
 
   return {
-    evento, sessao, mostrarContador, recusar, configurado,
+    evento, sessao, mostrarContador, recusar, configurado, estado,
     novaPartida: sorteio,
     get recusou() { return recusou; },
     get ativo() { return ativo(); }
