@@ -223,3 +223,10 @@ canvas.cena {
 footer { display: flex; gap: 14px; align-items: center; justify-content: center; flex-wrap: wrap; }
 .contador { font-family: "VT323", monospace; font-size: 18px; color: var(--bg-ink); opacity: .8; }
 .aviso-dados { font-size: 16px; color: var(--lcd-dim); margin: 6px 0 0; }
+
+/* créditos */
+.assinatura { width: 100%; text-align: center; margin: 0; font-size: 13px; opacity: .75; }
+.autora { font-size: 22px; }
+.autora small { font-size: 17px; color: var(--lcd-dim); }
+.links-cr { display: flex; flex-wrap: wrap; gap: 6px; }
+.link-cr { text-decoration: none; display: inline-block; }

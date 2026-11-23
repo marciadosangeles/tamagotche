@@ -307,6 +307,8 @@
       if (m.tipo === 'escolha' && m.voltar !== false) html += '<button class="acao sec" data-x>Voltar</button>';
     } else if (m.tipo === 'foto') {
       html += htmlFoto(m);
+    } else if (m.tipo === 'creditos') {
+      html += m.html;
     } else if (m.tipo === 'pausa') {
       const resta = Math.max(0, Math.ceil((m.ate - Date.now()) / 1000));
       html += `<div class="contagem" id="contagem">${resta || '✓'}</div>
@@ -558,10 +560,35 @@
 
   const podeCompartilhar = m => !!(m.arquivo && navigator.canShare && navigator.canShare({ files: [m.arquivo] }));
   const spriteAtual = () => `${S.especie}_${fase().id}`;
+  /* ---------------- créditos ---------------- */
+  const CR = window.TAMAGOTCHE_CREDITOS || {};
+  const AUTORA = CR.autora || '';
+  function abrirCreditos() {
+    const linha = (rot, val) => val ? `<p><span class="tag">${esc(rot)}</span><br>${esc(val)}</p>` : '';
+    const formacao = [CR.trabalho, CR.curso, CR.instituicao, CR.ano].filter(Boolean).join(' · ');
+    const links = (CR.links || []).filter(l => l && l.url && /^(https?:|mailto:)/.test(l.url))
+      .map(l => `<a class="op link-cr" href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.rotulo || l.url)}</a>`).join('');
+    abrir({ tipo: 'creditos', html: `
+      <span class="tag">Créditos</span>
+      <h3>Tamagotchê</h3>
+      ${AUTORA ? `<p class="autora">${esc(AUTORA)}<br><small>${esc(CR.papel || '')}</small></p>` : ''}
+      ${linha('Trabalho', formacao)}
+      ${linha('Orientação', CR.orientacao)}
+      ${links ? `<div class="links-cr">${links}</div>` : ''}
+      ${linha('Homenagem', CR.homenagem)}
+      ${linha('Fontes', CR.fontes)}
+      ${linha('Desenvolvimento', CR.apoio)}
+      ${linha('Tipografia', CR.tipografia)}
+      <div><button class="acao" data-x>Fechar</button></div>` });
+  }
+  $('#b-creditos').onclick = () => { if (!modal || modal.tipo === 'creditos') abrirCreditos(); };
+  if (AUTORA) $('#assinatura').textContent = `Um jogo de ${AUTORA}${CR.ano ? ' · ' + CR.ano : ''}`;
+
   function textoPost() {
     const nome = esp().nome.toLowerCase();
     const link = /^https?:/.test(location.protocol) ? ' ' + location.origin + location.pathname : '';
-    return `Cuidei de ${um()} ${nome} no Tamagotchê, um jogo de Saúde Única com bichos do Rio Grande do Sul! #Tamagotchê #SaúdeÚnica${link}`;
+    const por = AUTORA ? ` Criado por ${AUTORA}.` : '';
+    return `Cuidei de ${um()} ${nome} no Tamagotchê, um jogo de Saúde Única com bichos do Rio Grande do Sul!${por} #Tamagotchê #SaúdeÚnica${link}`;
   }
   function baixar(m) {
     const a = document.createElement('a');
@@ -614,7 +641,7 @@
     g.fillStyle = '#2b211c';
     textoCabe(g, frase, 540, 1132, 52, 980);
     textoCabe(g, `Bicho ${Math.round(iBicho())} · Ambiente ${Math.round(iAmb())} · Gente ${Math.round(iGente())}`, 540, 1180, 42, 980);
-    g.fillStyle = '#5d7f3a'; textoCabe(g, '#Tamagotchê  #SaúdeÚnica', 540, 1226, 42, 980);
+    g.fillStyle = '#5d7f3a'; textoCabe(g, '#Tamagotchê  #SaúdeÚnica' + (AUTORA ? `  ·  jogo de ${AUTORA}` : ''), 540, 1226, 42, 980);
     faixa(g, 'charrua', 0, 1250, 1080, 46);
     faixa(g, 'guarani', 0, 1296, 1080, 54);
 
