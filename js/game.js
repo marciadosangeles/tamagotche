@@ -227,7 +227,7 @@
         <h2>Escolha seu bicho</h2>
         <div class="grid">${cards}</div>
         <p class="dica">Cada vida dura cerca de 12 minutos. Cuide do bicho, do ambiente e das pessoas: isso é Saúde Única.</p>
-        ${REGISTRO.configurado() && !REGISTRO.recusou ? '<p class="aviso-dados">O jogo registra dados anônimos de uso para pesquisa. Saiba mais em "Sobre o jogo".</p>' : ''}
+        ${REGISTRO.configurado() && !REGISTRO.recusou ? '<p class="aviso-dados">O jogo registra dados anônimos de uso. Saiba mais em "Sobre o jogo".</p>' : ''}
       </div>`;
     viewEl.querySelectorAll('canvas[data-thumb]').forEach(c => {
       const nm = c.dataset.thumb + '_adulto', t = tamanhoSprite(nm);
@@ -476,14 +476,14 @@
   };
 
   const TEXTO_SOBRE = 'O Tamagotchê é um jogo de cuidado com a fauna do Rio Grande do Sul baseado na abordagem de Saúde Única: a saúde das pessoas, dos animais e do ambiente é uma só.\n\nAs sessões são curtas e têm pausas ativas de propósito.\n\nAs faixas da moldura homenageiam três povos originários do RS:\n• Kaingang (topo): marcas compridas e redondas, rá téi e rá ror.\n• Charrua (meio): linhas paralelas da pintura corporal descrita em registros históricos e a boleadeira. A arte Charrua é pouco documentada; esta faixa precisa ser construída com a comunidade Charrua.\n• Mbyá Guarani (base): o zigue-zague do movimento da cobra e o losango da casa, da cestaria de taquara (ypara).\nEsses grafismos pertencem a esses povos. O uso aqui é uma homenagem que deve ser validada com as comunidades.';
-  const TEXTO_DADOS = '\n\nDados de uso: para a pesquisa do TCC, o jogo registra de forma anônima as visitas e um resumo de cada partida (bicho escolhido, pontuação, escolhas, pausas feitas, uso da foto e da velocidade). Não registra nome, e-mail, fotos nem localização exata. A foto nunca sai do aparelho, a menos que você a compartilhe.';
+  const TEXTO_DADOS = '\n\nDados de uso: para entender como o jogo é usado e melhorá-lo, ele registra de forma anônima as visitas e um resumo de cada partida (bicho escolhido, pontuação, escolhas, pausas feitas, uso da foto e da velocidade). Não registra nome, e-mail, fotos nem localização exata. A foto nunca sai do aparelho, a menos que você a compartilhe.';
   function abrirSobre() {
     if (!REGISTRO.configurado()) return abrir({ tipo: 'aviso', titulo: 'Sobre o jogo', ok: 'Fechar', texto: TEXTO_SOBRE });
     const r = REGISTRO.recusou;
     abrir({ tipo: 'escolha', titulo: 'Sobre o jogo',
       texto: TEXTO_SOBRE + TEXTO_DADOS + (r ? '\n\nVocê escolheu não enviar dados.' : ''),
       itens: [{ label: r ? 'Voltar a enviar dados anônimos' : 'Não enviar meus dados',
-        sub: r ? 'Ajuda a pesquisa sobre o jogo' : 'O jogo continua funcionando normalmente',
+        sub: r ? 'Ajuda a melhorar o jogo' : 'O jogo continua funcionando normalmente',
         fn: () => { REGISTRO.recusar(!r); abrirSobre(); if (tela === 'inicio') renderTela(); } }] });
   }
   $('#b-sobre').onclick = abrirSobre;
@@ -565,15 +565,12 @@
   const AUTORA = CR.autora || '';
   function abrirCreditos() {
     const linha = (rot, val) => val ? `<p><span class="tag">${esc(rot)}</span><br>${esc(val)}</p>` : '';
-    const formacao = [CR.trabalho, CR.curso, CR.instituicao, CR.ano].filter(Boolean).join(' · ');
     const links = (CR.links || []).filter(l => l && l.url && /^(https?:|mailto:)/.test(l.url))
       .map(l => `<a class="op link-cr" href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.rotulo || l.url)}</a>`).join('');
     abrir({ tipo: 'creditos', html: `
       <span class="tag">Créditos</span>
       <h3>Tamagotchê</h3>
-      ${AUTORA ? `<p class="autora">${esc(AUTORA)}<br><small>${esc(CR.papel || '')}</small></p>` : ''}
-      ${linha('Trabalho', formacao)}
-      ${linha('Orientação', CR.orientacao)}
+      ${AUTORA ? `<p class="autora">${esc(AUTORA)}<br><small>${esc([CR.papel, CR.ano].filter(Boolean).join(' · '))}</small></p>` : ''}
       ${links ? `<div class="links-cr">${links}</div>` : ''}
       ${linha('Homenagem', CR.homenagem)}
       ${linha('Fontes', CR.fontes)}

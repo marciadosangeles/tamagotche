@@ -71,7 +71,7 @@ js/sprites.js   pixel art (cada letra é uma cor da paleta)
 js/data.js      espécies, cartas de saber, acontecimentos e pausas ativas
 js/game.js      regras, tempo, telas e desenho da cena
 js/config.js    códigos do GoatCounter e da planilha
-js/creditos.js  autora, trabalho, orientação, links e agradecimentos
+js/creditos.js  autora, links e agradecimentos
 js/registro.js  envio de visitas, eventos e partidas
 planilha/       script da Planilha Google e passo a passo
 ```
@@ -84,7 +84,7 @@ planilha/       script da Planilha Google e passo a passo
 
 ## Outras especificações
 
-Cada sessão terminada fica salva no navegador (`localStorage`, chave `tamagotche.hist.v1`) com data, pontuação dos três pilares, cartas liberadas, escolhas cuidadosas x descuidadas e pausas feitas x oferecidas. Essa cópia local fica só no aparelho; o envio anônimo para a pesquisa está descrito em "Contador de acessos e registro de partidas". Para ver no navegador: console → `JSON.parse(localStorage.getItem('tamagotche.hist.v1'))`. O registro inclui a velocidade máxima usada (`velMax`).
+Cada sessão terminada fica salva no navegador (`localStorage`, chave `tamagotche.hist.v1`) com data, pontuação dos três pilares, cartas liberadas, escolhas cuidadosas x descuidadas e pausas feitas x oferecidas. Essa cópia local fica só no aparelho; o envio anônimo está descrito em "Contador de acessos e registro de partidas". Para ver no navegador: console → `JSON.parse(localStorage.getItem('tamagotche.hist.v1'))`. O registro inclui a velocidade máxima usada (`velMax`).
 
 ## Contador de acessos e registro de partidas
 
@@ -104,11 +104,11 @@ São duas camadas, ligadas em `js/config.js`:
 
 Nada é enviado com o jogo aberto no próprio computador (arquivo local), com `?rapido` ou `?teste` no endereço, ou quando a pessoa escolhe "Não enviar meus dados" em "Sobre o jogo". O jogo não registra nome, e-mail, fotos nem localização exata. A tela inicial avisa que há registro anônimo.
 
-Se os dados forem usados como resultado do TCC, confirme com a orientação se é preciso aprovação do Comitê de Ética (CEP) e um termo de consentimento, principalmente com participantes menores de idade.
+Se um dia os dados forem usados em pesquisa ou publicação acadêmica, verifique antes se é preciso aprovação de um Comitê de Ética (CEP) e termo de consentimento, principalmente com participantes menores de idade.
 
 ## Créditos
 
-O botão **Créditos**, no rodapé, mostra autora, trabalho, orientação, links de divulgação, homenagem aos povos indígenas, fontes e o apoio de IA no desenvolvimento. A assinatura "Um jogo de Márcia dos Angeles" aparece no rodapé, no cartão de foto e no texto de compartilhamento. Para mudar qualquer item, edite `js/creditos.js`. Campos vazios não aparecem.
+O botão **Créditos**, no rodapé, mostra autora, links de divulgação, homenagem aos povos indígenas, fontes e o apoio de IA no desenvolvimento. A assinatura "Um jogo de Márcia dos Angeles" aparece no rodapé, no cartão de foto e no texto de compartilhamento. Para mudar qualquer item, edite `js/creditos.js`. Campos vazios não aparecem.
 
 ## Arte e cultura indígena
 
@@ -125,7 +125,7 @@ Esses grafismos são expressões culturais com significados próprios, e o uso s
 
 ## Nome
 
-"Tamagotchi" é marca registrada da Bandai. Para um trabalho acadêmico sem fins comerciais o risco é baixo, mas vale conferir com a orientação se o nome "Tamagotchê" pode ficar na versão pública.
+"Tamagotchi" é marca registrada da Bandai. Para um projeto educativo sem fins comerciais o risco é baixo, mas vale conferir antes de uma divulgação ampla se o nome "Tamagotchê" pode ficar na versão pública.
 
 ## Fontes do conteúdo
 

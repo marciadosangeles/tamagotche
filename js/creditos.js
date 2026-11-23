@@ -2,10 +2,6 @@
 window.TAMAGOTCHE_CREDITOS = {
   autora: 'Márcia dos Angeles',
   papel: 'Criação, pesquisa e conteúdo',
-  trabalho: 'Trabalho de Conclusão de Curso',
-  curso: '',
-  instituicao: '',
-  orientacao: '',
   ano: '2026',
   // links de divulgação: GitHub, Lattes, Instagram, LinkedIn, e-mail...
   links: [
