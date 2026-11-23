@@ -7,5 +7,5 @@
                 (termina em /exec). Veja planilha/LEIA-ME.md. */
 window.TAMAGOTCHE_CONFIG = {
   goatcounter: 'marciadosangeles',
-  planilha: ''
+  planilha: 'https://script.google.com/macros/s/AKfycbxhc1kRplBG0RIWOi1MRtOOiDe04yxW-0SU6FWiOgFisor8m2Q0ComDlGK214luMxma/exec'
 };
