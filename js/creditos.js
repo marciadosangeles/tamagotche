@@ -1,6 +1,6 @@
 /* Créditos do TamagoTchÊ. Edite aqui: os campos vazios ('') não aparecem. */
 window.TAMAGOTCHE_CREDITOS = {
-  autora: 'Márcia dos Angeles',
+  autora: 'Márcia dos Angeles Luna Leite',
   papel: 'Criação, pesquisa e conteúdo',
   ano: '2026',
   // links de divulgação: GitHub, Lattes, Instagram, LinkedIn, e-mail...

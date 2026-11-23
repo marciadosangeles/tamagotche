@@ -99,7 +99,7 @@ Se um dia os dados forem usados em pesquisa ou publicação acadêmica, verifiqu
 
 ## Créditos
 
-O botão **Créditos**, no rodapé, mostra autora, links de divulgação, homenagem aos povos indígenas, fontes e o apoio de IA no desenvolvimento. A assinatura "Um jogo de Márcia dos Angeles" aparece no rodapé, no cartão de foto e no texto de compartilhamento. Para mudar qualquer item, edite `js/creditos.js`. Campos vazios não aparecem.
+O botão **Créditos**, no rodapé, mostra autora, links de divulgação, homenagem aos povos indígenas, fontes e o apoio de IA no desenvolvimento. A assinatura "Um jogo de Márcia dos Angeles Luna Leite" aparece no rodapé, no cartão de foto e no texto de compartilhamento. Para mudar qualquer item, edite `js/creditos.js`. Campos vazios não aparecem.
 
 ## Arte e cultura indígena
 
