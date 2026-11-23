@@ -475,7 +475,7 @@
       itens: S.cartas.map(id => ({ label: CARTAS[id].titulo, sub: CARTAS[id].pilar + (S.lidas.includes(id) ? '' : ' · nova!'), fn: () => abrirCarta(id) })) });
   };
 
-  const TEXTO_SOBRE = 'O TamagoTchÊ é um jogo de cuidado com a fauna do Rio Grande do Sul baseado na abordagem de Saúde Única: a saúde das pessoas, dos animais e do ambiente é uma só.\n\nAs sessões são curtas e têm pausas ativas de propósito.\n\nAs faixas da moldura homenageiam três povos originários do RS:\n• Kaingang (topo): marcas compridas e redondas, rá téi e rá ror.\n• Charrua (meio): linhas paralelas da pintura corporal descrita em registros históricos e a boleadeira. A arte Charrua é pouco documentada; esta faixa precisa ser construída com a comunidade Charrua.\n• Mbyá Guarani (base): o zigue-zague do movimento da cobra e o losango da casa, da cestaria de taquara (ypara).\nEsses grafismos pertencem a esses povos. O uso aqui é uma homenagem que deve ser validada com as comunidades.';
+  const TEXTO_SOBRE = 'O TamagoTchÊ é um jogo de cuidado com a fauna do Rio Grande do Sul baseado na abordagem de Saúde Única: a saúde das pessoas, dos animais e do ambiente é uma só.\n\nAs sessões são curtas e têm pausas ativas de propósito.\n\nAs faixas da moldura homenageiam três povos originários do RS:\n• Kaingang (topo): marcas compridas e redondas, rá téi e rá ror.\n• Charrua (meio): linhas paralelas da pintura corporal descrita em registros históricos e a boleadeira.\n• Mbyá Guarani (base): o zigue-zague do movimento da cobra e o losango da casa, da cestaria de taquara (ypara).\nEsses grafismos pertencem a esses povos e aparecem aqui como homenagem.';
   const TEXTO_DADOS = '\n\nDados de uso: para entender como o jogo é usado e melhorá-lo, ele registra de forma anônima as visitas e um resumo de cada partida (bicho escolhido, pontuação, escolhas, pausas feitas, uso da foto e da velocidade). Não registra nome, e-mail, fotos nem localização exata. A foto nunca sai do aparelho, a menos que você a compartilhe.';
   function abrirSobre() {
     if (!REGISTRO.configurado()) return abrir({ tipo: 'aviso', titulo: 'Sobre o jogo', ok: 'Fechar', texto: TEXTO_SOBRE });
@@ -530,7 +530,7 @@
     on('abrir-cam', async () => {
       m.erro = '';
       if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-        m.erro = 'Este navegador não permite usar a câmera aqui. Faça o cartão sem foto ou abra o jogo pelo endereço https.';
+        m.erro = 'Este navegador não permite usar a câmera aqui. Você pode fazer o cartão sem foto.';
         return renderModal();
       }
       try {
@@ -579,7 +579,7 @@
       <div><button class="acao" data-x>Fechar</button></div>` });
   }
   $('#b-creditos').onclick = () => { if (!modal || modal.tipo === 'creditos') abrirCreditos(); };
-  if (AUTORA) $('#assinatura').textContent = `Um jogo de ${AUTORA}${CR.ano ? ' · ' + CR.ano : ''}`;
+  if (AUTORA) $('#assinatura').textContent = `© ${CR.ano || new Date().getFullYear()} ${AUTORA}`;
 
   function textoPost() {
     const nome = esp().nome.toLowerCase();

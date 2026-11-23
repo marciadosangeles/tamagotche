@@ -9,6 +9,6 @@ window.TAMAGOTCHE_CREDITOS = {
   ],
   homenagem: 'Aos povos Kaingang, Mbyá Guarani e Charrua, cuja arte inspira as faixas da moldura.',
   apoio: 'Programação e pixel art desenvolvidas com apoio de inteligência artificial (Claude, da Anthropic), sob direção da autora.',
-  fontes: 'Conteúdo de saúde e fauna baseado em materiais do Ministério da Saúde, do Governo do RS, da UFRGS (CECLIMAR), da FURG e da Prefeitura de Porto Alegre. Lista completa no README do projeto.',
+  fontes: 'Conteúdo de saúde e fauna baseado em materiais do Ministério da Saúde, do Governo do RS, da UFRGS (CECLIMAR), da FURG e da Prefeitura de Porto Alegre.',
   tipografia: 'Fontes Press Start 2P e VT323 (Google Fonts, licença SIL OFL).'
 };

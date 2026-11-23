@@ -4,44 +4,77 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>TamagoTchÊ · Bichos do Sul</title>
-<meta name="description" content="Jogo de cuidado com a fauna do Rio Grande do Sul baseado na abordagem de Saúde Única.">
-<meta property="og:title" content="TamagoTchÊ">
+<meta name="description" content="Jogo educativo de cuidado com a fauna do Rio Grande do Sul, baseado na abordagem de Saúde Única.">
+<meta name="author" content="Márcia dos Angeles">
+<meta name="theme-color" content="#f4ecdc">
+<meta property="og:title" content="TamagoTchÊ · Bichos do Sul">
+<meta property="og:description" content="Cuide de um bicho do Rio Grande do Sul do nascimento à velhice. Saúde do bicho, do ambiente e das pessoas: Saúde Única.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cellipse cx='8' cy='8.5' rx='7' ry='7.5' fill='%23e9d6a6' stroke='%232b211c' stroke-width='1.2'/%3E%3Crect x='4' y='4' width='8' height='6' rx='1' fill='%23e4e9cc' stroke='%232b211c'/%3E%3Ccircle cx='8' cy='12.5' r='1.2' fill='%23b5452b'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<main class="wrap">
-  <div class="device">
-    <div class="band band-kaingang" aria-hidden="true" title="Inspirado na arte Kaingang"></div>
-    <header class="device-top">
-      <h1>TamagoTchÊ</h1>
-      <p>Bichos do Sul · Saúde Única</p>
-    </header>
-    <div class="bezel">
-      <div class="screen" id="screen">
-        <div id="view"></div>
-        <div id="modal" class="modal" hidden></div>
+<main class="pagina">
+
+  <section class="jogo" aria-label="Jogo">
+    <div class="device">
+      <div class="band band-kaingang" aria-hidden="true" title="Inspirado na arte Kaingang"></div>
+      <header class="device-top">
+        <h1>TamagoTchÊ</h1>
+        <p>Bichos do Sul · Saúde Única</p>
+      </header>
+      <div class="bezel">
+        <div class="screen" id="screen">
+          <div id="view"></div>
+          <div id="modal" class="modal" hidden></div>
+        </div>
       </div>
+      <div class="band band-charrua" aria-hidden="true" title="Inspirado na arte Charrua"></div>
+      <nav class="buttons" aria-label="Ações">
+        <button id="b-comer" class="btn"><span class="dot"></span>Comer</button>
+        <button id="b-cuidar" class="btn"><span class="dot"></span>Cuidar</button>
+        <button id="b-ambiente" class="btn"><span class="dot"></span>Ambiente</button>
+        <button id="b-saber" class="btn"><span class="dot"></span>Saber</button>
+        <button id="b-foto" class="btn"><span class="dot foto"></span>Foto</button>
+      </nav>
+      <div class="band band-guarani" aria-hidden="true" title="Inspirado na arte Mbyá Guarani"></div>
     </div>
-    <div class="band band-charrua" aria-hidden="true" title="Inspirado na arte Charrua"></div>
-    <nav class="buttons" aria-label="Ações">
-      <button id="b-comer" class="btn"><span class="dot"></span>Comer</button>
-      <button id="b-cuidar" class="btn"><span class="dot"></span>Cuidar</button>
-      <button id="b-ambiente" class="btn"><span class="dot"></span>Ambiente</button>
-      <button id="b-saber" class="btn"><span class="dot"></span>Saber</button>
-      <button id="b-foto" class="btn"><span class="dot foto"></span>Foto</button>
-    </nav>
-    <div class="band band-guarani" aria-hidden="true" title="Inspirado na arte Mbyá Guarani"></div>
-  </div>
-  <footer>
+  </section>
+
+  <section class="intro" aria-labelledby="intro-titulo">
+    <p class="sobrelinha">Jogo educativo · Saúde Única</p>
+    <h2 id="intro-titulo">Cuide de um bicho do Rio Grande do Sul, do nascimento à velhice.</h2>
+    <p class="lead">A saúde do seu bicho depende do ambiente em que ele vive e das pessoas ao redor. Cada escolha conta para os três.</p>
+
+    <ul class="pilares">
+      <li><span class="ponto bicho"></span><div><b>Bicho</b><span>Alimentação natural, descanso e cuidado veterinário.</span></div></li>
+      <li><span class="ponto amb"></span><div><b>Ambiente</b><span>Água limpa, mata nativa e menos lixo.</span></div></li>
+      <li><span class="ponto gente"></span><div><b>Gente</b><span>Prevenção de zoonoses e informação de qualidade.</span></div></li>
+    </ul>
+
+    <dl class="fatos">
+      <div><dt>6</dt><dd>espécies nativas</dd></div>
+      <div><dt>12 min</dt><dd>por vida</dd></div>
+      <div><dt>3</dt><dd>pausas ativas</dd></div>
+    </dl>
+
+    <p class="especies">Capivara · Sabiá-laranjeira · Quero-quero · Graxaim-do-mato · Tigre-d'água · Boto-de-Lahille</p>
+  </section>
+
+</main>
+
+<footer class="rodape">
+  <nav class="rodape-links" aria-label="Informações">
     <button id="b-sobre" class="link">Sobre o jogo</button>
     <button id="b-creditos" class="link">Créditos</button>
     <span id="contador" class="contador" hidden></span>
-    <p class="assinatura" id="assinatura"></p>
-  </footer>
-</main>
+  </nav>
+  <p class="assinatura" id="assinatura"></p>
+</footer>
+
 <script src="js/config.js"></script>
 <script src="js/creditos.js"></script>
 <script src="js/registro.js"></script>
